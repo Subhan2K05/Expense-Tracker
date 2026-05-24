@@ -9,19 +9,35 @@ function Summary({ transactions }) {
 
   const balance = totalIncome - totalExpenses;
 
+  const fmt = (n) =>
+    n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 });
+
   return (
     <div className="summary">
       <div className="summary-card">
-        <h3>Income</h3>
-        <p className="income-amount">${totalIncome}</p>
+        <div className="summary-icon income">💵</div>
+        <div className="summary-info">
+          <h3>Total Income</h3>
+          <p className="income-amount">{fmt(totalIncome)}</p>
+        </div>
       </div>
+
       <div className="summary-card">
-        <h3>Expenses</h3>
-        <p className="expense-amount">${totalExpenses}</p>
+        <div className="summary-icon expense">💸</div>
+        <div className="summary-info">
+          <h3>Total Expenses</h3>
+          <p className="expense-amount">{fmt(totalExpenses)}</p>
+        </div>
       </div>
+
       <div className="summary-card">
-        <h3>Balance</h3>
-        <p className="balance-amount">${balance}</p>
+        <div className="summary-icon balance">⚖️</div>
+        <div className="summary-info">
+          <h3>Balance</h3>
+          <p className={`balance-amount ${balance >= 0 ? 'balance-positive' : 'balance-negative'}`}>
+            {fmt(balance)}
+          </p>
+        </div>
       </div>
     </div>
   );
